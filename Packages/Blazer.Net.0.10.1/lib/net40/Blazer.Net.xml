@@ -1,0 +1,1517 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Blazer.Net</name>
+    </assembly>
+    <members>
+        <member name="T:Force.Blazer.Algorithms.BlockEncoder">
+            <summary>
+            Decoder of block version of Blazer algorithm
+            </summary>
+            <remarks>This version provides relative good and fast compression but decompression rate is same as compression</remarks>
+        </member>
+        <member name="T:Force.Blazer.Algorithms.IEncoder">
+            <summary>
+            Inteface for implementing encoders for Blazer algoritms
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.IEncoder.Encode(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Encodes given buffer
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.IEncoder.Init(System.Int32)">
+            <summary>
+            Initializes encoder with information about maximum uncompressed block size
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.IEncoder.GetAlgorithmId">
+            <summary>
+            Returns algorithm id
+            </summary>
+        </member>
+        <member name="F:Force.Blazer.Algorithms.BlockEncoder.HASH_TABLE_LEN">
+            <summary>
+            Length of hashtable - 1
+            </summary>
+        </member>
+        <member name="F:Force.Blazer.Algorithms.BlockEncoder._bufferOut">
+            <summary>
+            Storage for output buffer
+            </summary>
+        </member>
+        <member name="F:Force.Blazer.Algorithms.BlockEncoder._hashArr">
+            <summary>
+            Hash array to store dictionary between iterations
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.BlockEncoder.Encode(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Encodes given buffer
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.BlockEncoder.Init(System.Int32)">
+            <summary>
+            Initializes encoder with information about maximum uncompressed block size
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.BlockEncoder.CompressBlock(System.Byte[],System.Int32,System.Int32,System.Byte[],System.Int32,System.Boolean)">
+            <summary>
+            Compresses block of data
+            </summary>
+            <param name="bufferIn">In buffer</param>
+            <param name="bufferInOffset">In buffer offset</param>
+            <param name="bufferInLength">In buffer right offset (offset + count)</param>
+            <param name="bufferOut">Out buffer, should be enough size</param>
+            <param name="bufferOutOffset">Out buffer offset</param>
+            <param name="doCleanup">Cleanup internal data after compression</param>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.BlockEncoder.CompressBlockExternal(System.Byte[],System.Int32,System.Int32,System.Byte[],System.Int32,System.Int32[])">
+            <summary>
+            Compressed block of data, can be used independently for byte arrays
+            </summary>
+            <param name="bufferIn">In buffer</param>
+            <param name="bufferInOffset">In buffer offset</param>
+            <param name="bufferInLength">In buffer right offset (offset + count)</param>
+            <param name="bufferOut">Out buffer, should be enough size</param>
+            <param name="bufferOutOffset">Out buffer offset</param>
+            <param name="hashArr">Hash array. Can be null.</param>
+            <returns>Bytes count of compressed data</returns>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.BlockEncoder.GetAlgorithmId">
+            <summary>
+            Returns algorithm id
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.BlockEncoder.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="P:Force.Blazer.Algorithms.BlockEncoder.HashArr">
+            <summary>
+            Returns internal hash array
+            </summary>
+        </member>
+        <member name="T:Force.Blazer.Algorithms.BlockDecoder">
+            <summary>
+            Decoder of block version of Blazer algorithm
+            </summary>
+            <remarks>This version provides relative good and fast compression but decompression rate is same as compression</remarks>
+        </member>
+        <member name="T:Force.Blazer.Algorithms.IDecoder">
+            <summary>
+            Inteface for implementing decoders for Blazer algoritms
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.IDecoder.Decode(System.Byte[],System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Decodes given buffer
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.IDecoder.Init(System.Int32)">
+            <summary>
+            Initializes decoder with information about maximum uncompressed block size
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.IDecoder.GetAlgorithmId">
+            <summary>
+            Returns algorithm id
+            </summary>
+        </member>
+        <member name="F:Force.Blazer.Algorithms.BlockDecoder.HASH_TABLE_LEN">
+            <summary>
+            Length of hashtable - 1
+            </summary>
+        </member>
+        <member name="F:Force.Blazer.Algorithms.BlockDecoder._hashArr">
+            <summary>
+            Hash array to store dictionary between iterations
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.BlockDecoder.Decode(System.Byte[],System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Decodes given buffer
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.BlockDecoder.Init(System.Int32)">
+            <summary>
+            Initializes decoder with information about maximum uncompressed block size
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.BlockDecoder.GetAlgorithmId">
+            <summary>
+            Returns algorithm id
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.BlockDecoder.DecompressBlock(System.Byte[],System.Int32,System.Int32,System.Byte[],System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Decompresses block of data
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.BlockDecoder.DecompressBlockExternal(System.Byte[],System.Int32,System.Int32,System.Byte[],System.Int32,System.Int32,System.Int32[])">
+            <summary>
+            Decompresses block of data, can be used independently for byte arrays
+            </summary>
+            <param name="bufferIn">In buffer</param>
+            <param name="bufferInOffset">In buffer offset</param>
+            <param name="bufferInLength">In buffer right offset (offset + count)</param>
+            <param name="bufferOut">Out buffer, should be enough size</param>
+            <param name="bufferOutOffset">Out buffer offset</param>
+            <param name="bufferOutLength">Out buffer maximum right offset (offset + count)</param>
+            <param name="hashArr">Hash array. Can be null.</param>
+            <returns>Bytes count of decompressed data</returns>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.BlockDecoder.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="P:Force.Blazer.Algorithms.BlockDecoder.HashArr">
+            <summary>
+            Returns internal hash array
+            </summary>
+        </member>
+        <member name="T:Force.Blazer.Algorithms.BlockDecoderNative">
+            <summary>
+            Native implementation of decoder of block version of Blazer algorithm
+            </summary>
+            <remarks>This version provides relative good and fast compression but decompression rate is same as compression</remarks>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.BlockDecoderNative.Init(System.Int32)">
+            <summary>
+            Initializes encoder with information about maximum uncompressed block size
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.BlockDecoderNative.DecompressBlock(System.Byte[],System.Int32,System.Int32,System.Byte[],System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Decompresses block of data
+            </summary>
+        </member>
+        <member name="T:Force.Blazer.Algorithms.BlockEncoderNative">
+            <summary>
+            Native implementation of encoder of block version of Blazer algorithm
+            </summary>
+            <remarks>This version provides relative good and fast compression but decompression rate is same as compression</remarks>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.BlockEncoderNative.CompressBlock(System.Byte[],System.Int32,System.Int32,System.Byte[],System.Int32,System.Boolean)">
+            <summary>
+            Compresses block of data
+            </summary>
+        </member>
+        <member name="T:Force.Blazer.Algorithms.Patterned.BasePatternedCompressor">
+            <summary>
+            Base implementation of Patterned Compressor/Decompressor
+            </summary>
+        </member>
+        <member name="T:Force.Blazer.Algorithms.Patterned.IPatternedCompressor">
+            <summary>
+            Common interface for Pattened Encoder/Decoder
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Patterned.IPatternedCompressor.CalculateMaxCompressedBufferLength(System.Int32)">
+            <summary>
+            Calculates max compressed buffer size for specified uncompressed data length
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Patterned.IPatternedCompressor.PreparePattern(System.Byte[])">
+            <summary>
+            Prepares pattern. Should be called only once for pattern
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Patterned.IPatternedCompressor.PreparePattern(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Prepares pattern. Should be called only once for pattern
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Patterned.IPatternedCompressor.EncodeWithPattern(System.Byte[],System.Int32,System.Int32,System.Byte[],System.Int32)">
+            <summary>
+            Encodes data with prepared pattern
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Patterned.IPatternedCompressor.DecodeWithPattern(System.Byte[],System.Int32,System.Int32,System.Byte[],System.Int32)">
+            <summary>
+            Decodes data with prepared pattern
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Patterned.IPatternedCompressor.EncodeWithPattern(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Encodes data with prepared pattern
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Patterned.IPatternedCompressor.EncodeWithPattern(System.Byte[])">
+            <summary>
+            Encodes data with prepared pattern
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Patterned.IPatternedCompressor.DecodeWithPattern(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Decodes data with prepared pattern
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Patterned.IPatternedCompressor.DecodeWithPattern(System.Byte[])">
+            <summary>
+            Decodes data with prepared pattern
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Patterned.BasePatternedCompressor.CalculateMaxCompressedBufferLength(System.Int32)">
+            <summary>
+            Calculates max compressed buffer size for specified uncompressed data length
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Patterned.BasePatternedCompressor.InitHashArray">
+            <summary>
+            Initializes internal hash array
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Patterned.BasePatternedCompressor.RestoreHashArray">
+            <summary>
+            Restores internal hash array
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Patterned.BasePatternedCompressor.GetAlgorithmId">
+            <summary>
+            Returns algorithm id
+            </summary>
+        </member>
+        <member name="F:Force.Blazer.Algorithms.Patterned.BasePatternedCompressor._innerBuffer">
+            <summary>
+            Inner buffer
+            </summary>
+        </member>
+        <member name="F:Force.Blazer.Algorithms.Patterned.BasePatternedCompressor._patternLength">
+            <summary>
+            Length of pattern
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Patterned.BasePatternedCompressor.CompressBlock(System.Int32,System.Byte[],System.Int32)">
+            <summary>
+            Compress block of data
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Patterned.BasePatternedCompressor.PreparePattern(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Prepares pattern. Should be called only once for one pattern
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Patterned.BasePatternedCompressor.PreparePattern(System.Byte[])">
+            <summary>
+            Prepares pattern. Should be called only once for one pattern
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Patterned.BasePatternedCompressor.EncodeWithPattern(System.Byte[],System.Int32,System.Int32,System.Byte[],System.Int32)">
+            <summary>
+            Encodes data with prepared pattern
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Patterned.BasePatternedCompressor.DecompressBlock(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Decompress block of data
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Patterned.BasePatternedCompressor.DecodeWithPattern(System.Byte[],System.Int32,System.Int32,System.Byte[],System.Int32)">
+            <summary>
+            Decodes data with prepared pattern
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Patterned.BasePatternedCompressor.EncodeWithPattern(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Encodes data with prepared pattern
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Patterned.BasePatternedCompressor.EncodeWithPattern(System.Byte[])">
+            <summary>
+            Encodes data with prepared pattern
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Patterned.BasePatternedCompressor.DecodeWithPattern(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Decodes data with prepared pattern
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Patterned.BasePatternedCompressor.DecodeWithPattern(System.Byte[])">
+            <summary>
+            Decodes data with prepared pattern
+            </summary>
+        </member>
+        <member name="T:Force.Blazer.Algorithms.Patterned.BlockPatternedCompressor">
+            <summary>
+            Patterned Compressor/Decompressor for Blazer Block algorithm
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Patterned.BlockPatternedCompressor.#ctor">
+            <summary>
+            Initializes patterned compressor
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Patterned.BlockPatternedCompressor.CalculateMaxCompressedBufferLength(System.Int32)">
+            <summary>
+            Calculates max compressed buffer size for specified uncompressed data length
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Patterned.BlockPatternedCompressor.InitHashArray">
+            <summary>
+            Initializes HashArray for Encoder 
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Patterned.BlockPatternedCompressor.RestoreHashArray">
+            <summary>
+            Restores HashArray for Encoder
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Patterned.BlockPatternedCompressor.GetAlgorithmId">
+            <summary>
+            Returns algorithm id
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Patterned.BlockPatternedCompressor.CompressBlock(System.Int32,System.Byte[],System.Int32)">
+            <summary>
+            Compress block of data
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Patterned.BlockPatternedCompressor.DecompressBlock(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Decompress block of data
+            </summary>
+        </member>
+        <member name="T:Force.Blazer.Algorithms.Patterned.StreamHighPatternedCompressor">
+            <summary>
+            Patterned Compressor/Decompressor for Blazer Stream High algorithm
+            </summary>
+            <remarks>Method is very slow to use in normal situations. Use only when needed in your specific case</remarks>
+        </member>
+        <member name="T:Force.Blazer.Algorithms.Patterned.StreamPatternedCompressor">
+            <summary>
+            Patterned Compressor/Decompressor for Blazer Stream algorithm
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Patterned.StreamPatternedCompressor.#ctor">
+            <summary>
+            Initializes patterned compressor
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Patterned.StreamPatternedCompressor.CalculateMaxCompressedBufferLength(System.Int32)">
+            <summary>
+            Calculates max compressed buffer size for specified uncompressed data length
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Patterned.StreamPatternedCompressor.InitHashArray">
+            <summary>
+            Initializes HashArray for Encoder 
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Patterned.StreamPatternedCompressor.RestoreHashArray">
+            <summary>
+            Restores HashArray for Encoder
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Patterned.StreamPatternedCompressor.GetAlgorithmId">
+            <summary>
+            Returns algorithm id
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Patterned.StreamPatternedCompressor.CompressBlock(System.Int32,System.Byte[],System.Int32)">
+            <summary>
+            Compress block of data
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Patterned.StreamPatternedCompressor.DecompressBlock(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Decompress block of data
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Patterned.StreamHighPatternedCompressor.#ctor">
+            <summary>
+            Initializes patterned compressor
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Patterned.StreamHighPatternedCompressor.InitHashArray">
+            <summary>
+            Initializes HashArray for Encoder 
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Patterned.StreamHighPatternedCompressor.RestoreHashArray">
+            <summary>
+            Restores HashArray for Encoder
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Patterned.StreamHighPatternedCompressor.CompressBlock(System.Int32,System.Byte[],System.Int32)">
+            <summary>
+            Compress block of data
+            </summary>
+        </member>
+        <member name="T:Force.Blazer.BlazerBlockType">
+            <summary>
+            Block type of Blazer archive
+            </summary>
+        </member>
+        <member name="F:Force.Blazer.BlazerBlockType.ControlDataEmpty">
+            <summary>
+            Empty control block
+            </summary>
+        </member>
+        <member name="F:Force.Blazer.BlazerBlockType.ControlData">
+            <summary>
+            Control block
+            </summary>
+        </member>
+        <member name="F:Force.Blazer.BlazerBlockType.Comment">
+            <summary>
+            File info block
+            </summary>
+        </member>
+        <member name="F:Force.Blazer.BlazerBlockType.FileInfo">
+            <summary>
+            File info block
+            </summary>
+        </member>
+        <member name="F:Force.Blazer.BlazerBlockType.Footer">
+            <summary>
+            Footer block
+            </summary>
+        </member>
+        <member name="T:Force.Blazer.BlazerDecompressionOptions">
+            <summary>
+            Options for decompression
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.BlazerDecompressionOptions.SetDecoderByAlgorithm(Force.Blazer.BlazerAlgorithm)">
+            <summary>
+            Set default decoder by algorithm
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.BlazerDecompressionOptions.CreateDefault">
+            <summary>
+            Create default options
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.BlazerDecompressionOptions.#ctor">
+            <summary>
+            Constructor for default options
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.BlazerDecompressionOptions.#ctor(System.String)">
+            <summary>
+            Constructor for default options with password
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.BlazerDecompressionOptions.#ctor(System.Byte[])">
+            <summary>
+            Constructor for default options with raw password
+            </summary>
+        </member>
+        <member name="P:Force.Blazer.BlazerDecompressionOptions.CompressionOptions">
+            <summary>
+            Initialize this property for archive without header, to provide required information for decompression
+            </summary>
+        </member>
+        <member name="P:Force.Blazer.BlazerDecompressionOptions.Decoder">
+            <summary>
+            Initialize this property for archive without header, to provide custom decoder
+            </summary>
+        </member>
+        <member name="P:Force.Blazer.BlazerDecompressionOptions.LeaveStreamOpen">
+            <summary>
+            Leave inner stream open after closing blazer stream
+            </summary>
+        </member>
+        <member name="P:Force.Blazer.BlazerDecompressionOptions.Password">
+            <summary>
+            Password for encrypting data
+            </summary>
+        </member>
+        <member name="P:Force.Blazer.BlazerDecompressionOptions.PasswordRaw">
+            <summary>
+            Password for decrypting data (raw binary variant)
+            </summary>
+        </member>
+        <member name="P:Force.Blazer.BlazerDecompressionOptions.EncyptFull">
+            <summary>
+            Encrypt full flag. Fully encypted streams does not reveal any information about inner data (blazer header is also encypted)
+            </summary>
+        </member>
+        <member name="P:Force.Blazer.BlazerDecompressionOptions.NoSeek">
+            <summary>
+            Disable seeking for inner stream
+            </summary>
+            <remarks>By default, <see cref="T:Force.Blazer.BlazerOutputStream"/> checks is stream seekable. But with this flag this check can be disabled and seek will not be performed for any stream.
+            This also can be useful for muliple joined streams, when only part of real stream is a Blazer archive</remarks>
+        </member>
+        <member name="P:Force.Blazer.BlazerDecompressionOptions.ControlDataCallback">
+            <summary>
+            Callback on control data block. If is set, will be called for every control data
+            </summary>
+        </member>
+        <member name="P:Force.Blazer.BlazerDecompressionOptions.FileInfoCallback">
+            <summary>
+            Callbacks on new file info
+            </summary>
+        </member>
+        <member name="P:Force.Blazer.BlazerDecompressionOptions.DoNotFireInfoCallbackOnOneFile">
+            <summary>
+            Skip <see cref="P:Force.Blazer.BlazerDecompressionOptions.FileInfoCallback"/> when archive contains only one file (can be useful, when file name is analyzed manually)
+            </summary>
+        </member>
+        <member name="P:Force.Blazer.BlazerDecompressionOptions.DoNotPerformDecoding">
+            <summary>
+            Skip real decoding. This option can be useful for 'list' or 'test' modes, when it required to get some info (e.g. files list) without real decoding
+            </summary>
+        </member>
+        <member name="T:Force.Blazer.Algorithms.BufferInfo">
+            <summary>
+            Information about data buffer
+            </summary>
+        </member>
+        <member name="F:Force.Blazer.Algorithms.BufferInfo.Buffer">
+            <summary>
+            Data buffer
+            </summary>
+        </member>
+        <member name="F:Force.Blazer.Algorithms.BufferInfo.Offset">
+            <summary>
+            Buffer offset
+            </summary>
+        </member>
+        <member name="F:Force.Blazer.Algorithms.BufferInfo.Length">
+            <summary>
+            Buffer data length (Offset + Count, right position of valid data in buffer)
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.BufferInfo.#ctor(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            BufferInfo constructor
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.BufferInfo.ExtractToSeparateArray">
+            <summary>
+            Extracts body to separate byte array
+            </summary>
+            <returns>new array</returns>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.BufferInfo.ExtractToSeparateArray(System.Int32)">
+            <summary>
+            Extracts body to separate byte array
+            </summary>
+            <param name="offset">additional offset for new array</param>
+            <returns>new array</returns>
+        </member>
+        <member name="P:Force.Blazer.Algorithms.BufferInfo.Count">
+            <summary>
+            Count of valid data in buffer)
+            </summary>
+        </member>
+        <member name="T:Force.Blazer.BlazerFlushMode">
+            <summary>
+            Flush variants for stream
+            </summary>
+        </member>
+        <member name="F:Force.Blazer.BlazerFlushMode.IgnoreFlush">
+            <summary>
+            Ignore all flush requests  (default variant)
+            </summary>
+        </member>
+        <member name="F:Force.Blazer.BlazerFlushMode.RespectFlush">
+            <summary>
+            Respect flush requests
+            </summary>
+        </member>
+        <member name="F:Force.Blazer.BlazerFlushMode.AutoFlush">
+            <summary>
+            Auto flush on every write
+            </summary>
+        </member>
+        <member name="F:Force.Blazer.BlazerFlushMode.SmartFlush">
+            <summary>
+            Try to determine, when flush should be performed
+            </summary>
+        </member>
+        <member name="T:Force.Blazer.BlazerPatternedHelper">
+            <summary>
+            Helper for patterned compression
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.BlazerPatternedHelper.CreateStream">
+            <summary>
+            Creates Stream algorithm Patterned compressor. Good on compression, fast on decompression
+            </summary>
+            <remarks>Do not use pattern data more than 64Kb. It is useless for this type</remarks>
+        </member>
+        <member name="M:Force.Blazer.BlazerPatternedHelper.CreateStreamHigh">
+            <summary>
+            Creates Stream algorithm Patterned compressor with high encoding. Slow on compression, fast on decompression
+            </summary>
+            <remarks>Compression is very slow. Use only when needed</remarks>
+        </member>
+        <member name="M:Force.Blazer.BlazerPatternedHelper.CreateBlock">
+            <summary>
+            Creates Block algorithm Patterned compressor. Good on compression, Good on decompression
+            </summary>
+            <remarks>Use this algorithm whan pattern is big (greater than 64Kb)</remarks>
+        </member>
+        <member name="M:Force.Blazer.BlazerPatternedHelper.CreateFromPatternAuto(System.Byte[])">
+            <summary>
+            Creates Patterned compressor and init it with pattern. Algorithm is selected by pattern size
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.BlazerPatternedHelper.CreateFromPatternAuto(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Creates Patterned compressor and init it with pattern. Algorithm is selected by pattern size
+            </summary>
+        </member>
+        <member name="T:Force.Blazer.Encyption.Iso10126TransformEmulator">
+            <summary>
+            This class emulates ISO10126 AES transform for .NET Core
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Encyption.Iso10126TransformEmulator.#ctor(System.Security.Cryptography.ICryptoTransform)">
+            <summary>
+            Constructor. Origignal transform should be aes with PKCS7 padding
+            </summary>
+            <param name="origTransofrm"></param>
+        </member>
+        <member name="M:Force.Blazer.Encyption.Iso10126TransformEmulator.Dispose">
+            <summary>
+            Dispose current transform
+            </summary>
+        </member>
+        <member name="T:Force.Blazer.Helpers.DataArrayCompressorHelper">
+            <summary>
+            Helper class for creating compressed arrays with data with length prefix
+            Can be useful for resources preparation
+            No algorithm information is stored
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Helpers.DataArrayCompressorHelper.CompressDataToArray(System.Byte[],Force.Blazer.Algorithms.IEncoder)">
+            <summary>
+            Compresses source data with specified encoder
+            </summary>
+            <param name="sourceData">array of source data</param>
+            <param name="encoder">selected encoder</param>
+            <returns>array of compressed data</returns>
+        </member>
+        <member name="M:Force.Blazer.Helpers.DataArrayCompressorHelper.CompressDataToArray(System.Byte[],System.Int32,System.Int32,Force.Blazer.Algorithms.IEncoder)">
+            <summary>
+            Compresses source data with specified encoder
+            </summary>
+            <param name="sourceData">array of source data</param>
+            <param name="offset">offset of array of source data</param>
+            <param name="count">count data to read from array of source data</param>
+            <param name="encoder">selected encoder</param>
+            <returns>array of compressed data</returns>
+        </member>
+        <member name="M:Force.Blazer.Helpers.DataArrayCompressorHelper.CompressDataToArrayAndWriteToStream(System.Byte[],Force.Blazer.Algorithms.IEncoder,System.IO.Stream)">
+            <summary>
+            Compresses source data with specified encoder and writes to stream
+            </summary>
+            <param name="sourceData">array of source data</param>
+            <param name="encoder">selected encoder</param>
+            <param name="outStream">stream to write data</param>
+        </member>
+        <member name="M:Force.Blazer.Helpers.DataArrayCompressorHelper.CompressDataToArrayAndWriteToStream(System.Byte[],System.Int32,System.Int32,Force.Blazer.Algorithms.IEncoder,System.IO.Stream)">
+            <summary>
+            Compresses source data with specified encoder and writes to stream
+            </summary>
+            <param name="sourceData">array of source data</param>
+            <param name="offset">offset of array of source data</param>
+            <param name="count">count data to read from array of source data</param>
+            <param name="encoder">selected encoder</param>
+            <param name="outStream">stream to write data</param>
+        </member>
+        <member name="M:Force.Blazer.Helpers.DataArrayCompressorHelper.DecompressDataArray(System.Byte[],Force.Blazer.Algorithms.IDecoder)">
+            <summary>
+            Decompresses data with specified decoder
+            </summary>
+            <param name="comprData">array of compressed data with length prefix</param>
+            <param name="decoder">selected decoder</param>
+            <returns>array of compressed data</returns>
+        </member>
+        <member name="M:Force.Blazer.Helpers.DataArrayCompressorHelper.DecompressDataArray(System.Byte[],System.Int32,System.Int32,Force.Blazer.Algorithms.IDecoder)">
+            <summary>
+            Decompresses data with specified decoder
+            </summary>
+            <param name="comprData">array of compressed data with length prefix</param>
+            <param name="offset">offset of array of source data</param>
+            <param name="count">count data to read from array of source data</param>
+            <param name="decoder">selected decoder</param>
+            <returns>array of compressed data</returns>
+        </member>
+        <member name="M:Force.Blazer.Helpers.DataArrayCompressorHelper.DecompressDataArrayToReadableStream(System.Byte[],Force.Blazer.Algorithms.IDecoder)">
+            <summary>
+            Decompresses data with specified decoder into stream
+            </summary>
+            <param name="comprData">array of compressed data with length prefix</param>
+            <param name="decoder">selected decoder</param>
+            <returns>Stream with uncompressed data</returns>
+        </member>
+        <member name="M:Force.Blazer.Helpers.DataArrayCompressorHelper.DecompressDataArrayToReadableStream(System.Byte[],System.Int32,System.Int32,Force.Blazer.Algorithms.IDecoder)">
+            <summary>
+            Decompresses data with specified decoder into stream
+            </summary>
+            <param name="comprData">array of compressed data with length prefix</param>
+            <param name="offset">offset of array of source data</param>
+            <param name="count">count data to read from array of source data</param>
+            <param name="decoder">selected decoder</param>
+            <returns>Stream with uncompressed data</returns>
+        </member>
+        <member name="T:Force.Blazer.Algorithms.StreamEncoderHigh">
+            <summary>
+            Slow, but with higher compression reate version of <see cref="T:Force.Blazer.Algorithms.StreamEncoder"/> of Blazer algorithm. Fully compatible with it.
+            </summary>
+            <remarks>Incompleted. Can be improved in future. But stable</remarks>
+        </member>
+        <member name="T:Force.Blazer.Algorithms.StreamEncoder">
+            <summary>
+            Encoder of Stream version of Blazer algorithm
+            </summary>
+            <remarks>Stream version is good for 'live' streamss, slightly slower than Block, but support stream flushing without
+            losing compression rate and has very fast decoder</remarks>
+        </member>
+        <member name="F:Force.Blazer.Algorithms.StreamEncoder.SIZE_SHIFT">
+            <summary>
+            Size to shift big data
+            </summary>
+        </member>
+        <member name="F:Force.Blazer.Algorithms.StreamEncoder._hashArr">
+            <summary>
+            Hash array to store dictionary between iterations
+            </summary>
+        </member>
+        <member name="F:Force.Blazer.Algorithms.StreamEncoder._bufferIn">
+            <summary>
+            Buffer to store inbound data between iterations
+            </summary>
+        </member>
+        <member name="F:Force.Blazer.Algorithms.StreamEncoder._bufferOut">
+            <summary>
+            Buffer to temporary store compressed data
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.StreamEncoder.GetAdditionalInSize">
+            <summary>
+            Returns additional size for inner buffers. Can be used to store some data or for optimiations
+            </summary>
+            <returns>Size in bytes</returns>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.StreamEncoder.Init(System.Int32)">
+            <summary>
+            Initializes encoder with information about maximum uncompressed block size
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.StreamEncoder.Encode(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Encodes given buffer
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.StreamEncoder.GetAlgorithmId">
+            <summary>
+            Returns algorithm id
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.StreamEncoder.CompressBlock(System.Byte[],System.Int32,System.Int32,System.Int32,System.Byte[],System.Int32)">
+            <summary>
+            Compresses block of data. See <see cref="M:Force.Blazer.Algorithms.StreamEncoder.CompressBlockExternal(System.Byte[],System.Int32,System.Int32,System.Int32,System.Byte[],System.Int32,System.Int32[])"/> for details
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.StreamEncoder.CompressData(System.Byte[])">
+            <summary>
+            Compresses independent block of data
+            </summary>
+            <param name="bufferIn">In buffer</param>
+            <returns>Compressed array</returns>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.StreamEncoder.CompressBlockExternal(System.Byte[],System.Int32,System.Int32,System.Int32,System.Byte[],System.Int32,System.Int32[])">
+            <summary>
+            Compresses block of data, can be used independently for byte arrays
+            </summary>
+            <param name="bufferIn">In buffer</param>
+            <param name="bufferInOffset">In buffer offset</param>
+            <param name="bufferInLength">In buffer right offset (offset + count)</param>
+            <param name="bufferInShift">Additional relative offset for data in hash array</param>
+            <param name="bufferOut">Out buffer, should be enough size</param>
+            <param name="bufferOutOffset">Out buffer offset</param>
+            <param name="hashArr">Hash array with data. Should be same for consecutive blocks of data</param>
+            <returns>Bytes count of compressed data</returns>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.StreamEncoder.ShiftHashtable">
+            <summary>
+            Shifts hashtable data
+            </summary>
+            <remarks>Use this method to periodically shift positions in array. It is required for streams longer than 2Gb</remarks>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.StreamEncoder.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="P:Force.Blazer.Algorithms.StreamEncoder.HashArr">
+            <summary>
+            Returns internal hash array
+            </summary>
+        </member>
+        <member name="F:Force.Blazer.Algorithms.StreamEncoderHigh.HASH_TABLE_LEN">
+            <summary>
+            Length of Hash Array - 1
+            </summary>
+        </member>
+        <member name="F:Force.Blazer.Algorithms.StreamEncoderHigh.HASHARR_CNT">
+            <summary>
+            Count of internal hash arrays
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.StreamEncoderHigh.Init(System.Int32)">
+            <summary>
+            Initializes encoder with information about maximum uncompressed block size
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.StreamEncoderHigh.ShiftHashtable">
+            <summary>
+            Shifts hashtable data
+            </summary>
+            <remarks>Use this method to periodically shift positions in array. It is required for streams longer than 2Gb</remarks>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.StreamEncoderHigh.CompressBlock(System.Byte[],System.Int32,System.Int32,System.Int32,System.Byte[],System.Int32)">
+            <summary>
+            Compresses block of data. See <see cref="M:Force.Blazer.Algorithms.StreamEncoder.CompressBlockExternal(System.Byte[],System.Int32,System.Int32,System.Int32,System.Byte[],System.Int32,System.Int32[])"/> for details
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.StreamEncoderHigh.CompressBlockHighExternal(System.Byte[],System.Int32,System.Int32,System.Int32,System.Byte[],System.Int32,System.Int32[][],System.Int32[])">
+            <summary>
+            Compresses block of data, can be used independently for byte arrays
+            </summary>
+            <param name="bufferIn">In buffer</param>
+            <param name="bufferInOffset">In buffer offset</param>
+            <param name="bufferInLength">In buffer right offset (offset + count)</param>
+            <param name="bufferInShift">Additional relative offset for data in hash array</param>
+            <param name="bufferOut">Out buffer, should be enough size</param>
+            <param name="bufferOutOffset">Out buffer offset</param>
+            <param name="hashArr">Hash arrays with data. Should be same for consecutive blocks of data</param>
+            /// <param name="hashArrPos">Position in hash arrays. Should be same for consecutive blocks of data</param>
+            <returns>Bytes count of compressed data</returns>
+        </member>
+        <member name="P:Force.Blazer.Algorithms.StreamEncoderHigh.HashArr2">
+            <summary>
+            Returns internal hash array
+            </summary>
+        </member>
+        <member name="P:Force.Blazer.Algorithms.StreamEncoderHigh.HashArrPos">
+            <summary>
+            Returns position in internal hash array
+            </summary>
+        </member>
+        <member name="T:Force.Blazer.Algorithms.Crc32C.Crc32C">
+            <summary>
+            Crc32C (Castagnoli) checksum implementation
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Crc32C.Crc32C.Calculate(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Calculates Crc32C data of given buffer
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Crc32C.Crc32C.Calculate(System.UInt32,System.Byte[])">
+            <summary>
+            Calculates Crc32C data of given buffer, updates existing crc
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Crc32C.Crc32C.Calculate(System.UInt32,System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Calculates Crc32C data of given buffer, updates existing crc
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Crc32C.Crc32C.Calculate(System.Byte[])">
+            <summary>
+            Calculates Crc32C data of given buffer
+            </summary>
+        </member>
+        <member name="T:Force.Blazer.Algorithms.Crc32C.Crc32CHardware">
+            <summary>
+            Native (hardware if available) Crc32C calculator. Do not use it directly, instead of use <see cref="T:Force.Blazer.Algorithms.Crc32C.Crc32C"/> class
+            </summary>
+        </member>
+        <member name="T:Force.Blazer.Algorithms.Crc32C.ICrc32CCalculator">
+            <summary>
+            Interface for Crc32 calculators
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Crc32C.ICrc32CCalculator.Calculate(System.UInt32,System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Calculates Crc32C data for buffer
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.Crc32C.Crc32CHardware.#ctor">
+            <summary>
+            Constructor, will throw exception if it impossible to use hardware implementation
+            </summary>
+        </member>
+        <member name="T:Force.Blazer.Algorithms.Crc32C.Crc32CSoftware">
+            <summary>
+            Software managed Crc32C calculator
+            </summary>
+        </member>
+        <member name="T:Force.Blazer.Algorithms.EncoderDecoderFactory">
+            <summary>
+            Factory for creating default encoders and decoders for Blazer algorithmns
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.EncoderDecoderFactory.GetDecoder(Force.Blazer.BlazerAlgorithm)">
+            <summary>
+            Returns decoder for algorithm
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.EncoderDecoderFactory.GetEncoder(Force.Blazer.BlazerAlgorithm)">
+            <summary>
+            Returns encoder for algorithm
+            </summary>
+        </member>
+        <member name="T:Force.Blazer.Algorithms.NoCompressionDecoder">
+            <summary>
+            Decoder of no compression version of Blazer algorithm
+            </summary>
+            <remarks>This is dummy decoder can be used for testing or storing data with Blazer structure</remarks>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.NoCompressionDecoder.Decode(System.Byte[],System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Decodes given buffer
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.NoCompressionDecoder.Init(System.Int32)">
+            <summary>
+            Initializes decoder with information about maximum uncompressed block size
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.NoCompressionDecoder.GetAlgorithmId">
+            <summary>
+            Returns algorithm id
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.NoCompressionDecoder.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="T:Force.Blazer.Algorithms.NoCompressionEncoder">
+            <summary>
+            Encoder of no compression version of Blazer algorithm
+            </summary>
+            <remarks>This is dummy decoder can be used for testing or storing data with Blazer structure</remarks>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.NoCompressionEncoder.Encode(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Encodes given buffer
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.NoCompressionEncoder.Init(System.Int32)">
+            <summary>
+            Initializes encoder with information about maximum uncompressed block size
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.NoCompressionEncoder.GetAlgorithmId">
+            <summary>
+            Returns algorithm id
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.NoCompressionEncoder.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="T:Force.Blazer.Algorithms.StreamDecoder">
+            <summary>
+            Decoder of Stream version of Blazer algorithm
+            </summary>
+            <remarks>Stream version is good for 'live' streamss, slightly slower than Block, but support stream flushing without
+            losing compression rate and has very fast decoder</remarks>
+        </member>
+        <member name="F:Force.Blazer.Algorithms.StreamDecoder._innerBuffer">
+            <summary>
+            Inner buffer to store data between iterations
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.StreamDecoder.Init(System.Int32)">
+            <summary>
+            Initializes decoder with information about maximum uncompressed block size
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.StreamDecoder.Decode(System.Byte[],System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Decodes given buffer
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.StreamDecoder.GetAlgorithmId">
+            <summary>
+            Returns algorithm id
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.StreamDecoder.DecompressBlock(System.Byte[],System.Int32,System.Int32,System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Decompresses block of data
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.StreamDecoder.DecompressData(System.Byte[])">
+            <summary>
+            Decompresses independent block of data
+            </summary>
+            <param name="bufferIn">In buffer</param>
+            <returns>Decompressed data</returns>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.StreamDecoder.DecompressBlockExternal(System.Byte[],System.Int32,System.Int32,System.Byte[]@,System.Int32,System.Int32,System.Boolean)">
+            <summary>
+            Decompresses block of data, can be used independently for byte arrays
+            </summary>
+            <param name="bufferIn">In buffer</param>
+            <param name="bufferInOffset">In buffer offset</param>
+            <param name="bufferInLength">In buffer right offset (offset + count)</param>
+            <param name="bufferOut">Out buffer, should be enough size</param>
+            <param name="bufferOutOffset">Out buffer offset</param>
+            <param name="bufferOutLength">Out buffer maximum right offset (offset + count)</param>
+            <param name="resizeOutBufferIfNeeded">Resize out buffer if smaller than required</param>
+            <returns>Bytes count of decompressed data</returns>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.StreamDecoder.Dispose">
+            <summary>
+            Performs application-defined tasks associated with freeing, releasing, or resetting unmanaged resources.
+            </summary>
+            <filterpriority>2</filterpriority>
+        </member>
+        <member name="T:Force.Blazer.Algorithms.StreamDecoderNative">
+            <summary>
+            Native implementation of decoder of Stream version of Blazer algorithm
+            </summary>
+            <remarks>Stream version is good for 'live' streamss, slightly slower than Block, but support stream flushing without
+            losing compression rate and has very fast decoder</remarks>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.StreamDecoderNative.Init(System.Int32)">
+            <summary>
+            Initializes decoder with information about maximum uncompressed block size
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.StreamDecoderNative.DecompressBlock(System.Byte[],System.Int32,System.Int32,System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Decompresses block of data
+            </summary>
+        </member>
+        <member name="T:Force.Blazer.Algorithms.StreamEncoderNative">
+            <summary>
+            Native implementation of Stream version encoder of Blazer algorithm
+            </summary>
+            <remarks>Stream version is good for 'live' streamss, slightly slower than Block, but support stream flushing without
+            losing compression rate and has very fast decoder</remarks>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.StreamEncoderNative.GetAdditionalInSize">
+            <summary>
+            Returns additional size for inner buffers. Can be used to store some data or for optimiations
+            </summary>
+            <returns>Size in bytes</returns>
+        </member>
+        <member name="M:Force.Blazer.Algorithms.StreamEncoderNative.CompressBlock(System.Byte[],System.Int32,System.Int32,System.Int32,System.Byte[],System.Int32)">
+            <summary>
+            Compresses block of data. See <see cref="M:Force.Blazer.Algorithms.StreamEncoder.CompressBlockExternal(System.Byte[],System.Int32,System.Int32,System.Int32,System.Byte[],System.Int32,System.Int32[])"/> for details
+            </summary>
+        </member>
+        <member name="T:Force.Blazer.BlazerAlgorithm">
+            <summary>
+            Blazer algorithm
+            </summary>
+        </member>
+        <member name="F:Force.Blazer.BlazerAlgorithm.NoCompress">
+            <summary>
+            No compression. Can be used for non-compressible data or for keeping stream stucture
+            </summary>
+        </member>
+        <member name="F:Force.Blazer.BlazerAlgorithm.Stream">
+            <summary>
+            Stream compression. Effective for 'live' streams
+            </summary>
+        </member>
+        <member name="F:Force.Blazer.BlazerAlgorithm.Block">
+            <summary>
+            Block compression. Effective for compressing files
+            </summary>
+        </member>
+        <member name="T:Force.Blazer.BlazerCompressionOptions">
+            <summary>
+            Options for compression
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.BlazerCompressionOptions.SetMaxBlockSizeFromFlags(Force.Blazer.BlazerFlags)">
+            <summary>
+            Sets max block size from flags
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.BlazerCompressionOptions.CreateNoCompression">
+            <summary>
+            Creates default options for no compression algorithm
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.BlazerCompressionOptions.CreateStream">
+            <summary>
+            Creates default options for Stream algorithm
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.BlazerCompressionOptions.CreateStreamHigh">
+            <summary>
+            Creates default options for Stream algorithm with high compression
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.BlazerCompressionOptions.CreateBlock">
+            <summary>
+            Creates default options for Block algorithm
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.BlazerCompressionOptions.GetFlags">
+            <summary>
+            Returns bit flags for current settings
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.BlazerCompressionOptions.SetEncoderByAlgorithm(Force.Blazer.BlazerAlgorithm)">
+            <summary>
+            Instantiates default encoder for specified algoritm
+            </summary>
+        </member>
+        <member name="P:Force.Blazer.BlazerCompressionOptions.Encoder">
+            <summary>
+            Encoder (realization of compression algorithm)
+            </summary>
+        </member>
+        <member name="P:Force.Blazer.BlazerCompressionOptions.Password">
+            <summary>
+            Password for encrypting data
+            </summary>
+        </member>
+        <member name="P:Force.Blazer.BlazerCompressionOptions.PasswordRaw">
+            <summary>
+            Password for encrypting data (raw binary variant)
+            </summary>
+        </member>
+        <member name="P:Force.Blazer.BlazerCompressionOptions.EncryptFull">
+            <summary>
+            Encrypt full flag. Fully encypted streams does not reveal any information about inner data (blazer header is also encypted)
+            </summary>
+            <remarks>Flush can be unsupported with this mode</remarks>
+        </member>
+        <member name="P:Force.Blazer.BlazerCompressionOptions.LeaveStreamOpen">
+            <summary>
+            Leave inner stream open after closing blazer stream
+            </summary>
+        </member>
+        <member name="P:Force.Blazer.BlazerCompressionOptions.IncludeCrc">
+            <summary>
+            Add Crc data to stream. If data are damaged, error will occure
+            </summary>
+            <remarks>Blazer uses Crc32C checksum algorithm</remarks>
+        </member>
+        <member name="P:Force.Blazer.BlazerCompressionOptions.IncludeHeader">
+            <summary>
+            Add header to stream. Stream without header requires manual flags set on decompression
+            </summary>
+        </member>
+        <member name="P:Force.Blazer.BlazerCompressionOptions.IncludeFooter">
+            <summary>
+            Add footer to stream. Footer allows to check on decompression that stream is correct
+            </summary>
+            <remarks>If on decompression stream is not seekable, footer will be validated only after decompressing data. If stream is seekable, before it.</remarks>
+        </member>
+        <member name="P:Force.Blazer.BlazerCompressionOptions.FlushMode">
+            <summary>
+            Respect <see cref="M:System.IO.Stream.Flush"/> command. 
+            </summary>
+            <remarks>If it set, every flush will compress current block of data and Flush it into inner stream. Otherwise, flush commands are ignored</remarks>
+        </member>
+        <member name="P:Force.Blazer.BlazerCompressionOptions.MaxBlockSize">
+            <summary>
+            Maximum block size to compress. Larger blocks require more memory, but can produce higher compression
+            </summary>
+            <remarks>Currently, block sizes from 512 bytes to 16Mb are supported</remarks>
+        </member>
+        <member name="P:Force.Blazer.BlazerCompressionOptions.DefaultStreamBlockSize">
+            <summary>
+            Gets default block size for Stream algorithm
+            </summary>
+        </member>
+        <member name="P:Force.Blazer.BlazerCompressionOptions.DefaultBlockBlockSize">
+            <summary>
+            Gets default block size for Block algorithm
+            </summary>
+        </member>
+        <member name="P:Force.Blazer.BlazerCompressionOptions.FileInfo">
+            <summary>
+            Gets or sets information about encoded file
+            </summary>
+        </member>
+        <member name="P:Force.Blazer.BlazerCompressionOptions.MultipleFiles">
+            <summary>
+            Marks, that archive can contains multiple file, pass file info through <see cref="M:Force.Blazer.BlazerInputStream.WriteFileInfo(Force.Blazer.BlazerFileInfo)"/>
+            </summary>
+        </member>
+        <member name="P:Force.Blazer.BlazerCompressionOptions.Comment">
+            <summary>
+            Gets or sets archive comment
+            </summary>
+        </member>
+        <member name="P:Force.Blazer.BlazerCompressionOptions.CommentRaw">
+            <summary>
+            Gets or sets archive raw (binary) comment. Useful for adding some info for technical streams
+            </summary>
+        </member>
+        <member name="T:Force.Blazer.BlazerFileInfo">
+            <summary>
+            Information about compressed file
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.BlazerFileInfo.FromFileInfo(System.IO.FileSystemInfo,System.String)">
+            <summary>
+            Creates file info from <see cref="T:System.IO.FileInfo"/> with optional custom relative name
+            </summary>
+            <remarks>If no relative name is passed, file name without path is used as file name. Otherwise, this relative name</remarks>
+        </member>
+        <member name="M:Force.Blazer.BlazerFileInfo.FromFileName(System.String,System.Boolean)">
+            <summary>
+            Creates file info from file name
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.BlazerFileInfo.ApplyToFile">
+            <summary>
+            Apply this file info to real file (set attributes and time)
+            </summary>
+        </member>
+        <member name="P:Force.Blazer.BlazerFileInfo.FileName">
+            <summary>
+            File name with path, or without it
+            </summary>
+        </member>
+        <member name="P:Force.Blazer.BlazerFileInfo.CreationTimeUtc">
+            <summary>
+            File creation time in UTC
+            </summary>
+        </member>
+        <member name="P:Force.Blazer.BlazerFileInfo.LastWriteTimeUtc">
+            <summary>
+            Last write time in UTC
+            </summary>
+        </member>
+        <member name="P:Force.Blazer.BlazerFileInfo.Length">
+            <summary>
+            File length
+            </summary>
+            <remarks>This length is just for information. Real compressed data can have another lengh</remarks>
+        </member>
+        <member name="P:Force.Blazer.BlazerFileInfo.Attributes">
+            <summary>
+            File attributes
+            </summary>
+        </member>
+        <member name="T:Force.Blazer.BlazerInputStream">
+            <summary>
+            Blazer compression stream implementation
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.BlazerInputStream.Seek(System.Int64,System.IO.SeekOrigin)">
+            <summary>
+            Not implemented for this stream
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.BlazerInputStream.SetLength(System.Int64)">
+            <summary>
+            Not implemented for this stream
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.BlazerInputStream.Read(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Not implemented for this stream
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.BlazerInputStream.#ctor(System.IO.Stream,Force.Blazer.BlazerCompressionOptions)">
+            <summary>
+            Constructs Blazer compression stream
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.BlazerInputStream.Dispose(System.Boolean)">
+            <summary>
+            Releases the unmanaged resources used by the <see cref="T:System.IO.Stream"/> and optionally releases the managed resources.
+            </summary>
+            <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="M:Force.Blazer.BlazerInputStream.WriteControlData(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Writes control data to stream 
+            </summary>
+            <remarks>Control data are not compressed and can be used for passing any service information while compressing data without affecting it</remarks>
+        </member>
+        <member name="M:Force.Blazer.BlazerInputStream.Write(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Writes a sequence of bytes to the current stream and advances the current position within this stream by the number of bytes written.
+            </summary>
+            <param name="buffer">An array of bytes. This method copies <paramref name="count"/> bytes from <paramref name="buffer"/> to the current stream. </param>
+            <param name="offset">The zero-based byte offset in <paramref name="buffer"/> at which to begin copying bytes to the current stream. </param>
+            <param name="count">The number of bytes to be written to the current stream. </param>
+        </member>
+        <member name="M:Force.Blazer.BlazerInputStream.WriteFileInfo(Force.Blazer.BlazerFileInfo)">
+            <summary>
+            In multiple files mode adds information about new file (and implies that previous is finished)
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.BlazerInputStream.Flush">
+            <summary>
+            Clears all buffers for this stream and causes any buffered data to be written to the underlying device.
+            </summary>
+        </member>
+        <member name="P:Force.Blazer.BlazerInputStream.CanRead">
+            <summary>
+            Cannot read this stream
+            </summary>
+        </member>
+        <member name="P:Force.Blazer.BlazerInputStream.CanSeek">
+            <summary>
+            Cannot seek this stream
+            </summary>
+        </member>
+        <member name="P:Force.Blazer.BlazerInputStream.CanWrite">
+            <summary>
+            Stream is writeable
+            </summary>
+        </member>
+        <member name="P:Force.Blazer.BlazerInputStream.Length">
+            <summary>
+            Returns -1
+            </summary>
+        </member>
+        <member name="P:Force.Blazer.BlazerInputStream.Position">
+            <summary>
+            Cannot set position in this stream
+            </summary>
+        </member>
+        <member name="T:Force.Blazer.BlazerOutputStream">
+            <summary>
+            Blazer decompression stream implementation
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.BlazerOutputStream.Flush">
+            <summary>
+            Not supported for this stream
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.BlazerOutputStream.Seek(System.Int64,System.IO.SeekOrigin)">
+            <summary>
+            Not supported for this stream
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.BlazerOutputStream.SetLength(System.Int64)">
+            <summary>
+            Not supported for this stream
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.BlazerOutputStream.Write(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Not supported for this stream
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.BlazerOutputStream.#ctor(System.IO.Stream,Force.Blazer.BlazerDecompressionOptions)">
+            <summary>
+            Constructs Blazer decompression stream
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.BlazerOutputStream.Dispose(System.Boolean)">
+            <summary>
+            Releases the unmanaged resources used by the <see cref="T:System.IO.Stream"/> and optionally releases the managed resources.
+            </summary>
+            <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
+        </member>
+        <member name="M:Force.Blazer.BlazerOutputStream.Read(System.Byte[],System.Int32,System.Int32)">
+            <summary>
+            Reads a sequence of bytes from the current stream and advances the position within the stream by the number of bytes read.
+            </summary>
+            <returns>
+            The total number of bytes read into the buffer. This can be less than the number of bytes requested if that many bytes are not currently available, or zero (0) if the end of the stream has been reached.
+            </returns>
+            <param name="buffer">An array of bytes. When this method returns, the buffer contains the specified byte array with the values between <paramref name="offset"/> and (<paramref name="offset"/> + <paramref name="count"/> - 1) replaced by the bytes read from the current source. </param>
+            <param name="offset">The zero-based byte offset in <paramref name="buffer"/> at which to begin storing the data read from the current stream. </param>
+            <param name="count">The maximum number of bytes to be read from the current stream. </param>
+        </member>
+        <member name="P:Force.Blazer.BlazerOutputStream.CanRead">
+            <summary>
+            Returns true
+            </summary>
+        </member>
+        <member name="P:Force.Blazer.BlazerOutputStream.CanSeek">
+            <summary>
+            Not supported for this stream
+            </summary>
+        </member>
+        <member name="P:Force.Blazer.BlazerOutputStream.CanWrite">
+            <summary>
+            Not supported for this stream
+            </summary>
+        </member>
+        <member name="P:Force.Blazer.BlazerOutputStream.Length">
+            <summary>
+            Not supported for this stream
+            </summary>
+        </member>
+        <member name="P:Force.Blazer.BlazerOutputStream.Position">
+            <summary>
+            Not supported for this stream
+            </summary>
+        </member>
+        <member name="P:Force.Blazer.BlazerOutputStream.FileInfo">
+            <summary>
+            Returns information about compressed file, if exists (and only one file in archive)
+            </summary>
+        </member>
+        <member name="P:Force.Blazer.BlazerOutputStream.HaveMultipleFiles">
+            <summary>
+            Returns information about multiple files mode in archive
+            </summary>
+        </member>
+        <member name="P:Force.Blazer.BlazerOutputStream.Algorithm">
+            <summary>
+            Returns algorithm used in archiver
+            </summary>
+        </member>
+        <member name="P:Force.Blazer.BlazerOutputStream.MaxUncompressedBlockSize">
+            <summary>
+            Returns max uncompressed block size
+            </summary>
+        </member>
+        <member name="P:Force.Blazer.BlazerOutputStream.Comment">
+            <summary>
+            Archive comment
+            </summary>
+        </member>
+        <member name="P:Force.Blazer.BlazerOutputStream.CommentRaw">
+            <summary>
+            Archive raw comment (binary)
+            </summary>
+        </member>
+        <member name="T:Force.Blazer.BlazerFlags">
+            <summary>
+            Header flags for Blazer archive
+            </summary>
+        </member>
+        <member name="F:Force.Blazer.BlazerFlags.None">
+            <summary>
+            No flags
+            </summary>
+        </member>
+        <member name="T:Force.Blazer.Native.NativeHelper">
+            <summary>
+            Helper for native implementation ofr Blazer algorithms
+            </summary>
+        </member>
+        <member name="M:Force.Blazer.Native.NativeHelper.SetNativeImplementation(System.Boolean)">
+            <summary>
+            Sets native implementation is enabled.
+            </summary>
+            <remarks>Native implementation can be turned off manually. If current environment does not support native implementation, software will be used anyway</remarks>
+        </member>
+        <member name="P:Force.Blazer.Native.NativeHelper.IsNativeAvailable">
+            <summary>
+            Returns is native library is available for usage
+            </summary>
+        </member>
+    </members>
+</doc>
